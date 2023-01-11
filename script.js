@@ -24,62 +24,72 @@ function eventer(){
 };
 function winnerChecker(computerScore,playerScore){
     if(computerScore > playerScore && computerScore == 5){
-        console.log("computer win");
+        document.getElementById("winnerAnnounce").innerHTML = "COMPUTER WON";
         return false;
         
     }
     else if(playerScore > computerScore && playerScore == 5 ){
-        console.log("player win");
+        document.getElementById("winnerAnnounce").innerHTML = "PLAYER WON";
         return true;
     }
-    
 }
 /*plays round*/
 function playRound(playerSelection,computerSelection){
-    
-    
     if(playerSelection === "rock" && computerSelection === "paper"){
         
         computerScore++;
-        console.log("you choose rock computer choose paper computer got point");
-        winnerChecker(computerScore,playerScore)
         
+        console.log("you choose rock computer choose paper computer got point");
     }
     else if(playerSelection === "rock"&& computerSelection ==="scissors"){
         
         playerScore++;
+        
         console.log("you choose rock computer choose scissors player got point");
-        winnerChecker(computerScore,playerScore);
     }
     else if(playerSelection === "paper"&& computerSelection ==="rock"){
         
         playerScore++;
-        console.log("you choose rock computer choose paper computer got point");
-        winnerChecker(computerScore,playerScore);
+        
+        console.log("you choose paper computer choose rock player got point");  
     }
     else if(playerSelection === "paper"&& computerSelection ==="scissors"){
         
         computerScore++;
-        console.log("computer");
-        winnerChecker(computerScore,playerScore);
+        
+        console.log("you choose paper computer choose scissors computer got point");
     }
     else if(playerSelection === "scissors"&& computerSelection ==="rock"){
         
         computerScore++;
-        console.log("computer");
-        winnerChecker(computerScore,playerScore);
+        
+        console.log("you choose scissors computer choose rock computer got point");
     }
     else if(playerSelection === "scissors"&& computerSelection ==="paper"){
         
         playerScore++;
-        console.log("player");
-        winnerChecker(computerScore,playerScore);
+        
+        console.log("you choose scissors computer choose paper player got point");
     }
     else{
         console.log("tie");
     }
-    
+    let condition = winnerChecker(computerScore,playerScore);
+    if (condition == true || condition == false){
+        scoreReset();
+    }
+    htmlScoreUpdater(playerScore,computerScore);
 }
+function htmlScoreUpdater(playerScore,computerScore){
+    document.getElementById("player-ScoreP").innerText = `PLAYER\n${playerScore}`;
+    document.getElementById("computer-ScoreP").innerText = `COMPUTER\n${computerScore}`;
+}
+function scoreReset(){
+    playerScore = 0;
+    computerScore = 0;
+}
+
 eventer();
+
 
 
